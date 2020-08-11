@@ -1,0 +1,68 @@
+@import url('https://fonts.googleapis.com/css2?family=Bungee&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Viga&display=swap');
+
+header {
+    background-color: #333;
+    color: #efeee7;
+    font-family: Bungee;
+    font-size: 3rem;
+    text-align: center;
+    padding-bottom: 0.5rem;
+}
+
+body {
+    font-family: Viga;
+    background-color: #efeee7;
+}
+
+summary {
+    margin-top: 1rem;
+}
+
+#intro-container {
+    background: white;
+    border: 1px solid black;
+    border-radius: 0.5rem;
+    padding: 2rem;
+    font-size: 1.4rem;
+}
+
+#intro-cell {
+    font-size: 1rem;
+}
+
+#example-cell {
+    padding: 1rem;
+    color: #efeee7;
+    background-color: #333;
+    border-radius: 0.5rem;
+}
+
+.grid-container {
+    max-width: 80rem;
+}
+
+#paint-demo {
+    margin-left: 12rem;
+}
+
+select {
+    width: 5rem;
+}
+
+i {
+    margin-top: 0.75rem;
+}
+
+#button-wrapper {
+    text-align: center;
+}
+
+#submit-button {
+    margin-top: 1rem;
+    font-size: 2rem;
+}
+
+#forms {
+    margin-left: 5rem;
+}

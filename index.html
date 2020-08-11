@@ -3,9 +3,116 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Logic Calculator</title>
+    <!-- Foundation -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/foundation-sites@6.6.3/dist/css/foundation.min.css" integrity="sha256-ogmFxjqiTMnZhxCqVmcqTvjfe1Y/ec4WaRj/aQPvn+I=" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.14.0/css/all.css" integrity="sha384-HzLeBuhoNPvSl5KYnjx0BT+WB0QEEqLprO+NBkkk5gbc67FTaL7XIGa2w1L0Xbgc" crossorigin="anonymous">
+    <!-- My CSS -->
+    <link rel="stylesheet" href="assets/styles/index.css">
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.js" integrity="sha256-QWo7LDvxbWT2tbbQ97B53yJnYU3WhH/C8ycbRAkjPDc=" crossorigin="anonymous"></script>
 </head>
 <body>
-    
+
+    <header class="grid-x">
+        <div class="cell padding-bottom-5" id="title">
+            Logic Calculator
+        </div>
+    </header>
+
+    <summary id="intro-container" class="grid-container">
+        <div class="grid-x grid-margin-x">
+            <div class="small-8 cell" id="intro-cell">
+                This page will attempt to discern the validity of a logical syllogism.
+                A syllogism is a kind of logical argument that applies deductive reasoning to arrive
+                at a conclusion based on two or more propositions.
+                For the sake of brevity, no distinction will be made between a major and a minor premise,
+                and only two premises will be considered for any given argument.
+                <img id="paint-demo" src="assets/images/logic.png">
+                <!-- Forms -->
+                <div id="forms" class="grid-container">
+                    <!-- Premise 1 -->
+                    <form id="premise-1" class="grid-x grid-margin-x">
+                        <label class="small-12 cell">Premise 1:</label>
+                        <div class="small-2 cell">
+                            <select id="premise-1-quantity">
+                                <option value="all">All</option>
+                                <option value="some">Some</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <input id="premise-1-category-1" class="small-3 cell" type="text" value="dogs">
+                        <div class="small-2 cell">
+                            <select>
+                                <option>is</option>
+                                <option selected>are</option>
+                            </select>
+                        </div>
+                        <input id="premise-1-category-2" class="small-3 cell" type="text" value="cute">
+                    </form>
+
+                    <!-- Premise 2 -->
+                    <form id="premise-2" class="grid-x grid-margin-x">
+                        <label class="small-12 cell">Premise 2:</label>
+                        <div class="small-2 cell">
+                            <select id="premise-2-quantity">
+                                <option value="all">All</option>
+                                <option value="some">Some</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <input id="premise-2-category-1" class="small-3 cell" type="text" value="Biscuits">
+                        <div class="small-2 cell">
+                            <select>
+                                <option>is</option>
+                                <option selected>are</option>
+                            </select>
+                        </div>
+                        <input id="premise-2-category-2" class="small-3 cell" type="text" value="dogs">
+                    </form>
+
+                    <!-- Conclusion-->
+                    <form id="conclusion" class="grid-x grid-margin-x">
+                        <label id="premise-3-quantity" class="small-12 cell">Conclusion:</label>
+                        <div class="small-2 cell">
+                            <select style="width: 5rem;">
+                                <option value="all">All</option>
+                                <option value="some">Some</option>
+                                <option value="no">No</option>
+                            </select>
+                        </div>
+                        <input id="premise-3-category-1" class="small-3 cell" type="text" value="Biscuits">
+                        <div class="small-2 cell">
+                            <select>
+                                <option>is</option>
+                                <option selected>are</option>
+                            </select>
+                        </div>
+                        <input id="premise-3-category-2" class="small-3 cell" type="text" value="cute">
+                        <i id="result-icon" class="fas fa-check-circle"></i>
+                    </form>
+                </div>
+                <div id="button-wrapper">
+                    <button id="submit-button" class="button primary">Submit</button>
+                </div>
+            </div>
+            <div class="auto cell" id="example-cell">
+                Example:<br>
+                1. All dogs are cute<br>
+                2. Biscuit is a dog<br>
+                3. Therefore, Biscuit is cute<br><br>
+                This argument is valid, regardless of whether or not there exists a dog named Biscuit,
+                and whether or not Biscuit is in fact, cute.<br><br>
+                As can be seen in the image on the left,
+                the first premise requires that all dogs be a subset of the "Cute" category, and since Biscuit
+                is defined as a dog in premise 2, that necessitates that Biscuit be cute.<br><br>
+                Note: The is/are selector is purely for grammatical purposes and has no effect on the conclusion.
+            </div>
+        </div>
+    </summary>
+
+    <!-- My JS -->
+    <script src="assets/scripts/index.js"></script>
 </body>
 </html>
