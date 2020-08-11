@@ -36,9 +36,9 @@ function checkValidity() {
         return
     }
 
-    var obj1 = {};
-    var obj2 = {};
-    var obj3 = {};
+    // Currently can't figure out how to code the categorical logic
+    // Reference Page: https://en.wikipedia.org/wiki/Syllogism#Examples
+
     switch (p1Q) {
         case "All":
             break;
