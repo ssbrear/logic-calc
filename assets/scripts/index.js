@@ -32,41 +32,69 @@ function checkValidity() {
     checkNonSequitur()
     if (isNonSequitur == true) {
         console.log("This argument is a non-sequitur, try again.");
-        resultIcon.removeClass("fa-check-circle").addClass("fa-times-circle");
+        dispResult(false);
         return
     }
 
-    // Currently can't figure out how to code the categorical logic
-    // Reference Page: https://en.wikipedia.org/wiki/Syllogism#Examples
+    var Categories = {
+    };
+    Categories[p1c2.val()] = {};
+    Categories['otherCat'] = {};
+    
+    switch ($(p1Q.children("option:selected")).val()) {
+        case "all":
+            Categories[p1c2.val()][p1c1.val()] = {};
+            break;
+        case "some":
+            Categories[p1c2.val()][p1c1.val()] = {};
+            Categories['otherCat'][p1c1.val()] = {};
+            break;
+        case "no":
+            Categories['otherCat'][p1c1.val()] = {};
+            break;
+    }
+    switch ($(p2Q.children("option:selected")).val()) {
+        case "all":
+            if (p1c1.val() == p2c2.val()) {
+                Categories[p1c2.val()][p2c2.val()][p2c1.val()] = {};
+            } else {
+                Categories[p2c2.val()] = {};
+                Categories[p2c2.val()][p2c1.val()] = {};
+                Categories[p2c2.val()][p2c1.val()][p1c1.val()] = {};
+                delete Categories[p2c1.val()];
+            }
+            break;
+        case "some":
 
-    switch (p1Q) {
-        case "All":
             break;
-        case "Some":
-            break;
-        case "No":
+        case "no":
             break;
     }
-    switch (p2Q) {
-        case "All":
+    switch ($(p3Q.children("option:selected")).val()) {
+        case "all":
+            if (Categories[p3c2.val()].hasOwnProperty(p3c1.val())) {
+                dispResult(true);
+            }
+            else {
+                var flag = false;
+                Object.keys(Categories[p3c2.val()]).forEach(field => {
+                    if (Categories[p3c2.val()][field].hasOwnProperty(p3c1.val())) {
+                        flag = true;
+                    }
+                })
+                dispResult(flag);
+                break;
+            }
             break;
-        case "Some":
+        case "some":
             break;
-        case "No":
-            break;
-    }
-    switch (p3Q) {
-        case "All":
-            break;
-        case "Some":
-            break;
-        case "No":
+        case "no":
             break;
     }
 }
 
+// Checks to make sure there are exactly two copies of each category
 function checkNonSequitur() {
-    // Checks to make sure there are exactly two copies of each category
     var p1 = [p1c1.val(), p1c2.val()];
     var p2 = [p2c1.val(), p2c2.val()];
     var p3 = [p3c1.val(), p3c2.val()];
@@ -74,24 +102,36 @@ function checkNonSequitur() {
         isNonSequitur = true;
         return
     }
+
+    function checkExactlyTwo(arrChecking, arrRef) {
+        arrChecking.forEach(element => {
+            var count = 0;
+            for (var i = 0; i < 4; i++) {
+                if (arrRef[i] == element) {
+                    count++;
+                }
+                else {
+                }
+            }
+            if (count != 1) {
+                isNonSequitur = true;
+                return
+            }
+        });
+    }
+
     checkExactlyTwo(p1, p2.concat(p3))
     checkExactlyTwo(p2, p1.concat(p3))
     checkExactlyTwo(p3, p1.concat(p2))
 }
 
-function checkExactlyTwo(arrChecking, arrRef) {
-    arrChecking.forEach(element => {
-        var count = 0;
-        for (var i = 0; i < 4; i++) {
-            if (arrRef[i] == element) {
-                count++;
-            }
-            else {
-            }
-        }
-        if (count != 1) {
-            isNonSequitur = true;
-            return
-        }
-    });
+function dispResult (correct) {
+    if (correct) {
+        console.log("This argument is valid");
+        resultIcon.removeClass().addClass("fas fa-check-circle");
+    }
+    else {
+        console.log("This argument is not valid");
+        resultIcon.removeClass().addClass("fas fa-times-circle");
+    }
 }

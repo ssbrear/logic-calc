@@ -27,8 +27,8 @@
                 This page will attempt to discern the validity of a logical syllogism.
                 A syllogism is a kind of logical argument that applies deductive reasoning to arrive
                 at a conclusion based on two or more propositions.
-                For the sake of brevity, no distinction will be made between a major and a minor premise,
-                and only two premises will be considered for any given argument.
+                No distinction will be made between a major and a minor premise,
+                and only two premises will be considered for any given argument.<br>
                 <img id="paint-demo" src="assets/images/logic.png">
                 <!-- Forms -->
                 <div id="forms" class="grid-container">
@@ -74,9 +74,9 @@
 
                     <!-- Conclusion-->
                     <form id="conclusion" class="grid-x grid-margin-x">
-                        <label id="premise-3-quantity" class="small-12 cell">Conclusion:</label>
+                        <label class="small-12 cell">Conclusion:</label>
                         <div class="small-2 cell">
-                            <select style="width: 5rem;">
+                            <select id="premise-3-quantity">
                                 <option value="all">All</option>
                                 <option value="some">Some</option>
                                 <option value="no">No</option>
@@ -90,7 +90,7 @@
                             </select>
                         </div>
                         <input id="premise-3-category-2" class="small-3 cell" type="text" value="cute">
-                        <i id="result-icon" class="fas fa-check-circle"></i>
+                        <i id="result-icon"></i>
                     </form>
                 </div>
                 <div id="button-wrapper">
