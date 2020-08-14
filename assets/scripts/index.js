@@ -1,16 +1,19 @@
 //// REFERENCES
 // Premise 1
 var p1Q = $("#premise-1-quantity");
+var p1G = $("#premise-1-grammar");
 var p1c1 = $("#premise-1-category-1");
 var p1c2 = $("#premise-1-category-2");
 
 // Premise 2
 var p2Q = $("#premise-2-quantity");
+var p2G = $("#premise-2-grammar");
 var p2c1 = $("#premise-2-category-1");
 var p2c2 = $("#premise-2-category-2");
 
 // Premise 3
 var p3Q = $("#premise-3-quantity");
+var p3G = $("#premise-3-grammar");
 var p3c1 = $("#premise-3-category-1");
 var p3c2 = $("#premise-3-category-2");
 
@@ -55,14 +58,6 @@ function checkValidity() {
     }
     switch ($(p2Q.children("option:selected")).val()) {
         case "all":
-            if (p1c1.val() == p2c2.val()) {
-                Categories[p1c2.val()][p2c2.val()][p2c1.val()] = {};
-            } else {
-                Categories[p2c2.val()] = {};
-                Categories[p2c2.val()][p2c1.val()] = {};
-                Categories[p2c2.val()][p2c1.val()][p1c1.val()] = {};
-                delete Categories[p2c1.val()];
-            }
             break;
         case "some":
 
@@ -125,6 +120,7 @@ function checkNonSequitur() {
     checkExactlyTwo(p3, p1.concat(p2))
 }
 
+// Console logs whether or not the argument is valid and displays an icon
 function dispResult (correct) {
     if (correct) {
         console.log("This argument is valid");
@@ -133,5 +129,44 @@ function dispResult (correct) {
     else {
         console.log("This argument is not valid");
         resultIcon.removeClass().addClass("fas fa-times-circle");
+    }
+}
+
+// Why doesn't the code below this work???
+
+p1Q.on("change", detectIfNot(1))
+p2Q.on("change", detectIfNot(2))
+p3Q.on("change", detectIfNot(3))
+
+function detectIfNot(premise) {
+    console.log("s")
+    switch (premise) {
+        case 1:
+            if (p1Q.val() == "some") {
+                var newOptionS = $("<option>");
+                var newOptionP = $("<option>");
+                newOptionS.text("is not");
+                newOptionP.text("are not");
+                p1G.append(newOptionP, newOptionS);
+            }
+            break;
+        case 2:
+            if (p2Q.val() == "some") {
+                var newOptionS = $("<option>");
+                var newOptionP = $("<option>");
+                newOptionS.text("is not");
+                newOptionP.text("are not");
+                p2G.append(newOptionP, newOptionS);
+            }
+            break;
+        case 3:
+            if (p3Q.val() == "some") {
+                var newOptionS = $("<option>");
+                var newOptionP = $("<option>");
+                newOptionS.text("is not");
+                newOptionP.text("are not");
+                p3G.append(newOptionP, newOptionS);
+            }
+            break;
     }
 }
